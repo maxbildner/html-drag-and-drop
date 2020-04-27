@@ -1,57 +1,41 @@
 window.addEventListener("load", () => {                                         // once dom and all assets loaded
-  let mypic = document.getElementById('picture');
-  let leftbox = document.getElementById('leftbox');
-  let rightbox = document.getElementById('rightbox');
+  // const picture = document.querySelector('.pics');                              // returns first html element that matches .pics class
+  const picture = document.querySelector('.fill');                              // returns first html element that matches .pics class
+  // picture = <img src="react-logo.png" alt="react-logo" class="pics">
 
-  // 'dragstart' happens as soon as you start to drag the image
-  mypic.addEventListener("dragstart", (e) => {
-    let code = '<img id="picture" src="react-logo.png">';
-    e.dataTransfer.setData('Text', code);
-  });  
+  const empties = document.querySelectorAll('.empty');                          // returns nodeList (array like)
+  // empties = NodeList [div.empty, div.empty, ... ]
 
-  // when we're done dragging image, delete it from DOM
-  mypic.addEventListener('dragend', (e) => {
-    // let pic = e.target;            
-    // pic.style.visibility = 'hidden';                                         // works but doesn't remove img element from DOM
+  picture.addEventListener('dragstart', (e) => {                                // when we start to drag an image
+    let pic = e.target; 
+    pic.className += ' hold';                                                   // give image we're dragging a border
+    setTimeout(() => (pic.className = 'invisible'), 0);                         // make image from where we dragged it invisible
+  });
 
-    let pic = e.target;
-    pic.parentNode.removeChild(pic);
+  picture.addEventListener('dragend', (e) => {                                  // when we let go of image
+    e.target.className = 'fill';                                                // make image visible
   });
 
 
-  // 'dragenter' is when something enters the area
-  leftbox.addEventListener("dragenter", (e) => {
-    e.preventDefault();                                                         // prevent default browser actions from happening
-    leftbox.style.background="SkyBlue";
-  });             
-  
-  // changes background color of leftbox back to default color if user changes mind
-  leftbox.addEventListener("dragleave", (e) => {
-    e.preventDefault();
-    leftbox.style.background="lightgrey";
-  });             
-  
-  leftbox.addEventListener("dragover", (e) =>  {
-    e.preventDefault();
-  });
+  // loop through empty boxes and add listeners
+  for (let i = 0; i < empties.length; i++) {
+    const emptydiv = empties[i];
+    emptydiv.addEventListener('dragover', (e) => e.preventDefault());
+    
+    emptydiv.addEventListener('dragenter', (e) => {                             // give div we're hovering image over light blue background
+      e.preventDefault();
+      e.target.className += ' hovered';
+    });
 
-  leftbox.addEventListener("drop", (e) => {
-    e.preventDefault();
-    leftbox.innerHTML = e.dataTransfer.getData('Text');
-  });
+    emptydiv.addEventListener('dragleave', (e) =>  {                            // as soon as we drag the image, make div background empty grey
+      e.preventDefault();
+      e.target.className = 'empty';
+    });
 
-
-  rightbox.addEventListener("dragenter", (e) => {
-    e.preventDefault();                                                         // prevent default browser actions from happening
-    rightbox.style.background = "SkyBlue";
-  }); 
-
-  rightbox.addEventListener("dragleave", (e) => {
-    e.preventDefault();
-    rightbox.style.background = "lightgrey";
-  });  
-
-  rightbox.addEventListener("drop", (e) => {
-    e.preventDefault();
-  });
+    emptydiv.addEventListener('drop', (e) => {
+      e.preventDefault();
+      e.target.className = 'empty';
+      e.target.append(picture);
+    });
+  }
 });

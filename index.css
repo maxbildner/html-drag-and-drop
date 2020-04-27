@@ -33,17 +33,35 @@ time, mark, audio, video {
   justify-content: space-between;
 }
 
-#leftbox {
+.empty {
   background: lightgrey;
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   border: 3px solid lightpink;
 }
 
-#rightbox {
-  background: lightgrey;
-  width: 250px;
-  height: 250px;
-  border: 3px solid lightpink;
+.pics {
+  width: 100%;
 }
 
+.fill {
+  background-image: url('https://source.unsplash.com/random/150x150');
+  position: relative;
+  height: 150px;
+  width: 150px;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
+
+.invisible {
+  
+}
+
+.hold {
+  border: solid 5px lightsteelblue
+}
+
+.hovered {
+  background: lightskyblue;
+}
