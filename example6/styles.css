@@ -1,0 +1,22 @@
+#wrap {
+  display: flex;
+  background: lightyellow;
+  justify-content: space-between;
+}
+
+#drag1, .drop-able {
+  width: 150px;
+  height: 150px;
+}
+
+#drag1:hover {
+  cursor:pointer;
+}
+
+.drop-able {
+  background: lightgray;
+}
+
+.hovered {
+  background: lightskyblue;
+}

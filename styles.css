@@ -1,0 +1,29 @@
+#wrap {
+  display: flex;
+  background: lightyellow;
+  justify-content: space-between;
+}
+
+.logos {
+  background-color: aqua;
+  cursor:pointer;
+}
+
+.logos:hover {
+  opacity: .5;
+}
+
+.drop-able {
+  background: lightgray;
+  width: 300px;
+  height: 300px;
+}
+
+.drop-able img {
+  width: 150px;
+  height: 150px;
+}
+
+.hovered {
+  background: lightskyblue;
+}

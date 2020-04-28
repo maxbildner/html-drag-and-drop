@@ -1,20 +1,19 @@
 window.addEventListener("load", () => {
-  // set event listeners to all logos
-  let logos = document.querySelectorAll('.logos');
+  // grab draggable react logo image
+  let logo = document.getElementById('drag1');
   
-  for (let i = 0; i < logos.length; i++) {
-    let logo = logos[i];
+  // make img draggable (default true for images)
+  logo.setAttribute('draggable', 'true');
 
-    // as soon as image is dragged
-    logo.addEventListener('dragstart', e => {
-      // set image id as payload of what we're dragging
-      e.dataTransfer.setData("text", e.target.id);
-    });
-  }
-
-  
   // grab dropable elements
   let divs = document.querySelectorAll('.drop-able')
+
+  // as soon as image is dragged
+  logo.addEventListener('dragstart', e => {
+
+    // set image id as payload of what we're dragging
+    e.dataTransfer.setData("text", e.target.id);
+  });
 
   // add event listeners to all dropable elements
   for (let i = 0; i < divs.length; i++) {
@@ -26,29 +25,26 @@ window.addEventListener("load", () => {
     // when image enters drop area
     div.addEventListener('dragenter', e => {
       e.preventDefault();
-      console.log('dragenter')
       
-      // e.currentTarget == <div class="drop-able hovered"></div>
-      e.currentTarget.className += ' hovered';
+      // e.target == <div class="drop-able"></div>
+      e.target.className += ' hovered';
     });
 
     // when image leaves drop area
     div.addEventListener('dragleave', e => {
       e.preventDefault();
-      
-      // e.currentTarget == <div class="drop-able hovered"></div>
-      e.currentTarget.className = 'drop-able';
+
+      // e.target == <div class="drop-able hovered"></div>
+      e.target.className = 'drop-able';
     });
 
     // when image is dropped
     div.addEventListener('drop', e => {
       e.preventDefault();
 
-      
-      let id = e.dataTransfer.getData('text');
       // e.target == <div class="drop-able"></div>
       // appendChild appends logo as the last child of e.target
-      e.target.appendChild(document.getElementById(id));
+      e.target.appendChild(logo);
 
       e.target.className = 'drop-able';
     });
