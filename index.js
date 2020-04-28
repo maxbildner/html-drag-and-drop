@@ -46,12 +46,10 @@ window.addEventListener("load", () => {
       console.log('drop')
       
       let id = e.dataTransfer.getData('text');
-      // e.target == <div class="drop-able"></div>
+      // e.currentTarget == <div class="drop-able"></div>
       // appendChild appends logo as the last child of e.target
-      // e.target.appendChild(document.getElementById(id));
       e.currentTarget.appendChild(document.getElementById(id));
 
-      // e.target.className = 'drop-able';
       e.currentTarget.className = 'drop-able';
     });
   } 

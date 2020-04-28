@@ -10,7 +10,10 @@
 }
 
 .logos:hover {
-  opacity: .5;
+  /* opacity: .5; */
+  filter: saturate(2);
+  /* border: 2px solid rgb(0, 136, 177);
+  box-sizing: border-box; */
 }
 
 .drop-able {
